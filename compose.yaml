@@ -1,0 +1,36 @@
+services:
+
+  postgres:
+    image: postgres:17
+    container_name: seatlock-postgres
+
+    environment:
+      POSTGRES_DB: seatlock_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - seatlock_postgres_data:/var/lib/postgresql/data
+
+
+  redis:
+    image: redis:7
+    container_name: seatlock-redis
+
+    ports:
+      - "6379:6379"
+
+
+  kafka:
+    image: apache/kafka:3.9.2
+    container_name: seatlock-kafka
+
+    ports:
+      - "9092:9092"
+
+
+volumes:
+  seatlock_postgres_data:
